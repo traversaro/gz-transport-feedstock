@@ -1,6 +1,6 @@
 {% set component_name = "transport" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "12.0.0" %}
+{% set version = "12.1.0" %}
 {% set major_version = version.split('.')[0] %}
 {% set name = repo_name + major_version %}
 {% set component_version = component_name + major_version %}
@@ -12,10 +12,10 @@ package:
 
 source:
   - url: https://github.com/gazebosim/{{ repo_name }}/archive/{{ repo_name }}{{ major_version }}_{{ version }}.tar.gz
-    sha256: 6193ab51218bab963bcf1a12b307677c99047bd0ba636eae79614264367ab940
+    sha256: b6bd46bf1ae73e8f49f298d754638ae75e877bc582e64cf8e5aad5f83135f989
 
 build:
-  number: 1
+  number: 0
 
 outputs:
   - name: {{ cxx_name }}
@@ -76,7 +76,7 @@ about:
   home: https://github.com/gazebosim/{{ repo_name }}
   license: Apache-2.0
   license_file: LICENSE
-  summary: 'Transport library for component communication based on publication/subscription and service calls.'
+  summary: Transport library for component communication based on publication/subscription and service calls.
 
 extra:
   feedstock-name: {{ repo_name }}
