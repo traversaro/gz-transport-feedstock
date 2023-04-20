@@ -1,11 +1,11 @@
-About gz-transport
-==================
+About gz-transport-feedstock
+============================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/gz-transport-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/gazebosim/gz-transport
 
 Package license: Apache-2.0
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/gz-transport-feedstock/blob/main/LICENSE.txt)
 
 Summary: Transport library for component communication based on publication/subscription and service calls.
 
