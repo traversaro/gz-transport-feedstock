@@ -1,31 +1,31 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 5e3aab859..843fb17cb 100644
+index cf7ee6f6d..a2a37a12c 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -38,9 +38,7 @@ message(STATUS "\n\n-- ====== Finding Dependencies ======")
+@@ -39,9 +39,7 @@ message(STATUS "\n\n-- ====== Finding Dependencies ======")
  
  #--------------------------------------
  # Find Protobuf
 -set(REQ_PROTOBUF_VER 3)
- ign_find_package(IgnProtobuf
+ gz_find_package(GzProtobuf
 -                 VERSION ${REQ_PROTOBUF_VER}
                   REQUIRED
                   PRETTY Protobuf)
  
 diff --git a/include/gz/transport/RepHandler.hh b/include/gz/transport/RepHandler.hh
-index 5d27f98c1..d6d7d0ee6 100644
+index b7950eebb..b9087d0d1 100644
 --- a/include/gz/transport/RepHandler.hh
 +++ b/include/gz/transport/RepHandler.hh
-@@ -26,7 +26,7 @@
- #pragma warning(pop)
+@@ -24,7 +24,7 @@
  #endif
- 
--#if GOOGLE_PROTOBUF_VERSION > 2999999
-+#if GOOGLE_PROTOBUF_VERSION > 2999999 && GOOGLE_PROTOBUF_VERSION < 4022000
+ #include <google/protobuf/message.h>
+ #include <google/protobuf/stubs/common.h>
+-#if GOOGLE_PROTOBUF_VERSION >= 3000000
++#if GOOGLE_PROTOBUF_VERSION >= 3000000 && GOOGLE_PROTOBUF_VERSION < 4022000
  #include <google/protobuf/stubs/casts.h>
  #endif
- 
-@@ -140,7 +140,10 @@ namespace ignition
+ #ifdef _MSC_VER
+@@ -141,7 +141,10 @@ namespace gz
            return false;
          }
  
@@ -38,19 +38,19 @@ index 5d27f98c1..d6d7d0ee6 100644
          auto msgRep = google::protobuf::down_cast<Rep*>(&_msgRep);
  #else
 diff --git a/include/gz/transport/SubscriptionHandler.hh b/include/gz/transport/SubscriptionHandler.hh
-index 78477add0..d69c83ddb 100644
+index 5f811f0e8..9e4d789b8 100644
 --- a/include/gz/transport/SubscriptionHandler.hh
 +++ b/include/gz/transport/SubscriptionHandler.hh
-@@ -28,7 +28,7 @@
- 
+@@ -24,7 +24,7 @@
+ #endif
+ #include <google/protobuf/message.h>
  #include <google/protobuf/stubs/common.h>
- 
 -#if GOOGLE_PROTOBUF_VERSION >= 3000000
 +#if GOOGLE_PROTOBUF_VERSION >= 3000000 && GOOGLE_PROTOBUF_VERSION < 4022000
  #include <google/protobuf/stubs/casts.h>
  #endif
- 
-@@ -211,7 +211,9 @@ namespace ignition
+ #ifdef _MSC_VER
+@@ -210,7 +210,9 @@ namespace gz
          if (!this->UpdateThrottling())
            return true;
  
