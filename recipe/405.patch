@@ -1,0 +1,63 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index cf7ee6f6d..a2a37a12c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -39,9 +39,7 @@ message(STATUS "\n\n-- ====== Finding Dependencies ======")
+ 
+ #--------------------------------------
+ # Find Protobuf
+-set(REQ_PROTOBUF_VER 3)
+ gz_find_package(GzProtobuf
+-                 VERSION ${REQ_PROTOBUF_VER}
+                  REQUIRED
+                  PRETTY Protobuf)
+ 
+diff --git a/include/gz/transport/RepHandler.hh b/include/gz/transport/RepHandler.hh
+index b7950eebb..b9087d0d1 100644
+--- a/include/gz/transport/RepHandler.hh
++++ b/include/gz/transport/RepHandler.hh
+@@ -24,7 +24,7 @@
+ #endif
+ #include <google/protobuf/message.h>
+ #include <google/protobuf/stubs/common.h>
+-#if GOOGLE_PROTOBUF_VERSION >= 3000000
++#if GOOGLE_PROTOBUF_VERSION >= 3000000 && GOOGLE_PROTOBUF_VERSION < 4022000
+ #include <google/protobuf/stubs/casts.h>
+ #endif
+ #ifdef _MSC_VER
+@@ -141,7 +141,10 @@ namespace gz
+           return false;
+         }
+ 
+-#if GOOGLE_PROTOBUF_VERSION > 2999999
++#if GOOGLE_PROTOBUF_VERSION >= 4022000
++        auto msgReq = google::protobuf::internal::DownCast<const Req*>(&_msgReq);
++        auto msgRep = google::protobuf::internal::DownCast<Rep*>(&_msgRep);
++#elif GOOGLE_PROTOBUF_VERSION > 2999999
+         auto msgReq = google::protobuf::down_cast<const Req*>(&_msgReq);
+         auto msgRep = google::protobuf::down_cast<Rep*>(&_msgRep);
+ #else
+diff --git a/include/gz/transport/SubscriptionHandler.hh b/include/gz/transport/SubscriptionHandler.hh
+index 5f811f0e8..9e4d789b8 100644
+--- a/include/gz/transport/SubscriptionHandler.hh
++++ b/include/gz/transport/SubscriptionHandler.hh
+@@ -24,7 +24,7 @@
+ #endif
+ #include <google/protobuf/message.h>
+ #include <google/protobuf/stubs/common.h>
+-#if GOOGLE_PROTOBUF_VERSION >= 3000000
++#if GOOGLE_PROTOBUF_VERSION >= 3000000 && GOOGLE_PROTOBUF_VERSION < 4022000
+ #include <google/protobuf/stubs/casts.h>
+ #endif
+ #ifdef _MSC_VER
+@@ -210,7 +210,9 @@ namespace gz
+         if (!this->UpdateThrottling())
+           return true;
+ 
+-#if GOOGLE_PROTOBUF_VERSION >= 3000000
++#if GOOGLE_PROTOBUF_VERSION >= 4022000
++        auto msgPtr = google::protobuf::internal::DownCast<const T*>(&_msg);
++#elif GOOGLE_PROTOBUF_VERSION >= 3000000
+         auto msgPtr = google::protobuf::down_cast<const T*>(&_msg);
+ #else
+         auto msgPtr = google::protobuf::internal::down_cast<const T*>(&_msg);
