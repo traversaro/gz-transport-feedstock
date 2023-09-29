@@ -81,8 +81,8 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--transport12-green.svg)](https://anaconda.org/conda-forge/gz-transport12) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-transport12.svg)](https://anaconda.org/conda-forge/gz-transport12) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-transport12.svg)](https://anaconda.org/conda-forge/gz-transport12) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-transport12.svg)](https://anaconda.org/conda-forge/gz-transport12) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-libgz--transport12-green.svg)](https://anaconda.org/conda-forge/libgz-transport12) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgz-transport12.svg)](https://anaconda.org/conda-forge/libgz-transport12) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgz-transport12.svg)](https://anaconda.org/conda-forge/libgz-transport12) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgz-transport12.svg)](https://anaconda.org/conda-forge/libgz-transport12) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--transport13-green.svg)](https://anaconda.org/conda-forge/gz-transport13) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-transport13.svg)](https://anaconda.org/conda-forge/gz-transport13) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-transport13.svg)](https://anaconda.org/conda-forge/gz-transport13) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-transport13.svg)](https://anaconda.org/conda-forge/gz-transport13) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libgz--transport13-green.svg)](https://anaconda.org/conda-forge/libgz-transport13) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgz-transport13.svg)](https://anaconda.org/conda-forge/libgz-transport13) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgz-transport13.svg)](https://anaconda.org/conda-forge/libgz-transport13) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgz-transport13.svg)](https://anaconda.org/conda-forge/libgz-transport13) |
 
 Installing gz-transport
 =======================
@@ -94,41 +94,41 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `gz-transport12, libgz-transport12` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `gz-transport13, libgz-transport13` can be installed with `conda`:
 
 ```
-conda install gz-transport12 libgz-transport12
-```
-
-or with `mamba`:
-
-```
-mamba install gz-transport12 libgz-transport12
-```
-
-It is possible to list all of the versions of `gz-transport12` available on your platform with `conda`:
-
-```
-conda search gz-transport12 --channel conda-forge
+conda install gz-transport13 libgz-transport13
 ```
 
 or with `mamba`:
 
 ```
-mamba search gz-transport12 --channel conda-forge
+mamba install gz-transport13 libgz-transport13
+```
+
+It is possible to list all of the versions of `gz-transport13` available on your platform with `conda`:
+
+```
+conda search gz-transport13 --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search gz-transport13 --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search gz-transport12 --channel conda-forge
+mamba repoquery search gz-transport13 --channel conda-forge
 
-# List packages depending on `gz-transport12`:
-mamba repoquery whoneeds gz-transport12 --channel conda-forge
+# List packages depending on `gz-transport13`:
+mamba repoquery whoneeds gz-transport13 --channel conda-forge
 
-# List dependencies of `gz-transport12`:
-mamba repoquery depends gz-transport12 --channel conda-forge
+# List dependencies of `gz-transport13`:
+mamba repoquery depends gz-transport13 --channel conda-forge
 ```
 
 
