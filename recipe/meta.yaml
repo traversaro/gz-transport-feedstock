@@ -33,7 +33,7 @@ outputs:
         - pkg-config
       host:
         - libgz-cmake3
-        - libgz-msgs9
+        - libgz-msgs10
         - libgz-tools2
         - libgz-utils2
         - cppzmq
