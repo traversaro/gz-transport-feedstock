@@ -82,6 +82,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gz--transport13-green.svg)](https://anaconda.org/conda-forge/gz-transport13) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-transport13.svg)](https://anaconda.org/conda-forge/gz-transport13) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-transport13.svg)](https://anaconda.org/conda-forge/gz-transport13) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-transport13.svg)](https://anaconda.org/conda-forge/gz-transport13) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--transport13--python-green.svg)](https://anaconda.org/conda-forge/gz-transport13-python) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-transport13-python.svg)](https://anaconda.org/conda-forge/gz-transport13-python) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-transport13-python.svg)](https://anaconda.org/conda-forge/gz-transport13-python) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-transport13-python.svg)](https://anaconda.org/conda-forge/gz-transport13-python) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libgz--transport13-green.svg)](https://anaconda.org/conda-forge/libgz-transport13) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgz-transport13.svg)](https://anaconda.org/conda-forge/libgz-transport13) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgz-transport13.svg)](https://anaconda.org/conda-forge/libgz-transport13) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgz-transport13.svg)](https://anaconda.org/conda-forge/libgz-transport13) |
 
 Installing gz-transport
@@ -94,16 +95,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `gz-transport13, libgz-transport13` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `gz-transport13, gz-transport13-python, libgz-transport13` can be installed with `conda`:
 
 ```
-conda install gz-transport13 libgz-transport13
+conda install gz-transport13 gz-transport13-python libgz-transport13
 ```
 
 or with `mamba`:
 
 ```
-mamba install gz-transport13 libgz-transport13
+mamba install gz-transport13 gz-transport13-python libgz-transport13
 ```
 
 It is possible to list all of the versions of `gz-transport13` available on your platform with `conda`:
