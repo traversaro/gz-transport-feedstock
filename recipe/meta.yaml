@@ -16,6 +16,7 @@ source:
     sha256: 8041d81693b69a94e36477178fdf1964f32725e520c33fec2e69c60f28fd84ca
     patches:
       - standalone_bindings.patch
+      - 452.patch
 
 build:
   number: 0
