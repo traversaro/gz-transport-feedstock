@@ -80,9 +80,11 @@ outputs:
         - pybind11
         - pybind11-abi
         - pytest
+        - gz-msgs10-python
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
         - python
+        - gz-msgs10-python
     test:
       commands:
         - pip check
