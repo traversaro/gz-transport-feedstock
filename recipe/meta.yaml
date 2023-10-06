@@ -43,6 +43,7 @@ outputs:
         - cppzmq
         - zeromq
         - libuuid                            # [linux]
+        - libabseil
         - libprotobuf
         - sqlite
       run:
@@ -81,6 +82,11 @@ outputs:
         - pybind11-abi
         - pytest
         - gz-msgs10-python
+        # Workaround for errors of type
+        # package libgz-sim7-<..> requires <...>, but none of the providers can be installed
+        - libabseil
+        - libprotobuf
+        - libgz-msgs10
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
         - python
