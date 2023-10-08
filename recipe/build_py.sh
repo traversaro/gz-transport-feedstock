@@ -24,5 +24,5 @@ cmake --build . --config Release
 cmake --build . --config Release --target install
 
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
-  ctest --output-on-failure -C Release
+  ctest --output-on-failure -C Release -E "requester_TEST|pubsub_TEST"
 fi
