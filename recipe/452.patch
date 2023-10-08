@@ -1,0 +1,27 @@
+From 25cc5bb546b9ef285a8824dc17983b03cfa0a317 Mon Sep 17 00:00:00 2001
+From: Silvio Traversaro <silvio@traversaro.it>
+Date: Thu, 5 Oct 2023 22:17:02 +0200
+Subject: [PATCH] Avoid to use CMAKE_SOURCE_DIR
+
+Signed-off-by: Silvio Traversaro <silvio@traversaro.it>
+---
+ python/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/python/CMakeLists.txt b/python/CMakeLists.txt
+index ea5f46b7d..b35f0fada 100644
+--- a/python/CMakeLists.txt
++++ b/python/CMakeLists.txt
+@@ -83,10 +83,10 @@ if (BUILD_TESTING AND NOT WIN32)
+   foreach (test ${python_tests})
+     if (pytest_FOUND)
+       add_test(NAME ${test}.py COMMAND
+-        "${Python3_EXECUTABLE}" -m pytest "${CMAKE_SOURCE_DIR}/python/test/${test}.py" --junitxml "${CMAKE_BINARY_DIR}/test_results/${test}.xml")
++        "${Python3_EXECUTABLE}" -m pytest "${CMAKE_CURRENT_SOURCE_DIR}/test/${test}.py" --junitxml "${CMAKE_BINARY_DIR}/test_results/${test}.xml")
+     else()
+       add_test(NAME ${test}.py COMMAND
+-        "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/python/test/${test}.py")
++        "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/test/${test}.py")
+     endif()
+     set(_env_vars)
+     list(APPEND _env_vars "CMAKE_BINARY_DIR=${CMAKE_BINARY_DIR}/bin")

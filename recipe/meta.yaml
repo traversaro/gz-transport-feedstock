@@ -1,10 +1,11 @@
 {% set component_name = "transport" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "12.2.1" %}
+{% set version = "13.0.0" %}
 {% set major_version = version.split('.')[0] %}
 {% set name = repo_name + major_version %}
 {% set component_version = component_name + major_version %}
 {% set cxx_name = "lib" + name %}
+{% set python_name = name + "-python" %}
 
 package:
   name: {{ name }}
@@ -12,7 +13,10 @@ package:
 
 source:
   - url: https://github.com/gazebosim/{{ repo_name }}/archive/{{ repo_name }}{{ major_version }}_{{ version }}.tar.gz
-    sha256: 85afa1098fda3015bd3439774d5b1518b443e771c235d23fb80560c8870f2b2a
+    sha256: 8041d81693b69a94e36477178fdf1964f32725e520c33fec2e69c60f28fd84ca
+    patches:
+      - standalone_bindings.patch
+      - 452.patch
 
 build:
   number: 0
@@ -33,12 +37,13 @@ outputs:
         - pkg-config
       host:
         - libgz-cmake3
-        - libgz-msgs9
+        - libgz-msgs10
         - libgz-tools2
         - libgz-utils2
         - cppzmq
         - zeromq
         - libuuid                            # [linux]
+        - libabseil
         - libprotobuf
         - sqlite
       run:
@@ -54,6 +59,46 @@ outputs:
         - if not exist %PREFIX%\\Library\\bin\\{{ name }}.dll exit 1  # [win]
         - if not exist %PREFIX%\\Library\\lib\\cmake\\{{ name }}\\{{ name }}-config.cmake exit 1  # [win]
 
+  - name: {{ python_name }}
+    script: build_py.sh  # [unix]
+    script: bld_py.bat  # [win]
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+        - ninja
+        - cmake
+        - pkg-config
+        - python                                 # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+        - pybind11                               # [build_platform != target_platform]
+        - pybind11-abi                           # [build_platform != target_platform]
+        - pytest                                 # [build_platform != target_platform]
+      host:
+        - {{ pin_subpackage(cxx_name, exact=True) }}
+        - python
+        - pip
+        - pybind11
+        - pybind11-abi
+        - pytest
+        - gz-msgs10-python
+        # Workaround for errors of type
+        # package libgz-sim7-<..> requires <...>, but none of the providers can be installed
+        - libabseil
+        - libprotobuf
+        - libgz-msgs10
+      run:
+        - {{ pin_subpackage(cxx_name, exact=True) }}
+        - python
+        - gz-msgs10-python
+    test:
+      commands:
+        - pip check
+      requires:
+        - pip
+      imports:
+        - gz.transport13
+
   - name: {{ name }}
     build:
       run_exports:
@@ -61,6 +106,7 @@ outputs:
     requirements:
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
+        - {{ pin_subpackage(python_name, max_pin='x.x.x') }}
     test:
       commands:
         - test -f ${PREFIX}/include/gz/{{ component_version }}/gz/{{ component_name }}.hh  # [not win]
@@ -71,6 +117,10 @@ outputs:
         - if not exist %PREFIX%\\Library\\lib\\{{ name }}.lib exit 1  # [win]
         - if not exist %PREFIX%\\Library\\bin\\{{ name }}.dll exit 1  # [win]
         - if not exist %PREFIX%\\Library\\lib\\cmake\\{{ name }}\\{{ name }}-config.cmake exit 1  # [win]
+      requires:
+        - pip
+      imports:
+        - gz.transport13
 
 about:
   home: https://github.com/gazebosim/{{ repo_name }}
