@@ -36,7 +36,7 @@ sqlite:
 target_platform:
 - osx-64
 zeromq:
-- 4.3.4
+- 4.3.5
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
