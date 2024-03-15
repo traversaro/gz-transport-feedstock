@@ -1,6 +1,6 @@
 {% set component_name = "transport" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "13.0.0" %}
+{% set version = "13.1.0" %}
 {% set major_version = version.split('.')[0] %}
 {% set name = repo_name + major_version %}
 {% set component_version = component_name + major_version %}
@@ -13,13 +13,13 @@ package:
 
 source:
   - url: https://github.com/gazebosim/{{ repo_name }}/archive/{{ repo_name }}{{ major_version }}_{{ version }}.tar.gz
-    sha256: 8041d81693b69a94e36477178fdf1964f32725e520c33fec2e69c60f28fd84ca
+    sha256: 43d4fb5c3f82ea53a604d347f884498cb30af412085d07af2e75250adccf2795
     patches:
       - standalone_bindings.patch
       - 452.patch
 
 build:
-  number: 7
+  number: 0
 
 outputs:
   - name: {{ cxx_name }}
