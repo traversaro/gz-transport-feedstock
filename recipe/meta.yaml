@@ -19,7 +19,7 @@ source:
       - 452.patch
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: {{ cxx_name }}
@@ -79,7 +79,6 @@ outputs:
       host:
         - {{ pin_subpackage(cxx_name, exact=True) }}
         - python
-        - pip
         - pybind11
         - pybind11-abi
         - pytest
