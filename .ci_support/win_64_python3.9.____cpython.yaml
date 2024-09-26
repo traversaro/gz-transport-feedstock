@@ -4,18 +4,14 @@ c_stdlib:
 - vs
 channel_sources:
 - conda-forge
-- conda-forge
-- conda-forge
-- conda-forge/label/python_rc,conda-forge
-- conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
 - vs2019
 libabseil:
-- '20240116'
+- '20240722'
 libprotobuf:
-- 4.25.3
+- 5.27.5
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -23,10 +19,6 @@ pin_run_as_build:
 pybind11_abi:
 - '4'
 python:
-- 3.10.* *_cpython
-- 3.11.* *_cpython
-- 3.12.* *_cpython
-- 3.13.* *_cp313
 - 3.9.* *_cpython
 sqlite:
 - '3'
