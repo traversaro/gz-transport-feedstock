@@ -37,10 +37,10 @@ outputs:
         - cmake
         - pkg-config
       host:
-        - libgz-cmake3
-        - libgz-msgs10
+        - libgz-cmake4
+        - libgz-msgs11
         - libgz-tools2
-        - libgz-utils2
+        - libgz-utils3
         - cppzmq
         - zeromq
         - libuuid                            # [linux]
@@ -82,23 +82,23 @@ outputs:
         - pybind11
         - pybind11-abi
         - pytest
-        - gz-msgs10-python
+        - gz-msgs11-python
         # Workaround for errors of type
         # package libgz-sim7-<..> requires <...>, but none of the providers can be installed
         - libabseil
         - libprotobuf
-        - libgz-msgs10
+        - libgz-msgs11
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
         - python
-        - gz-msgs10-python
+        - gz-msgs11-python
     test:
       commands:
         - pip check
       requires:
         - pip
       imports:
-        - gz.transport13
+        - gz.transport14
 
   - name: {{ name }}
     build:
@@ -121,7 +121,7 @@ outputs:
       requires:
         - pip
       imports:
-        - gz.transport13
+        - gz.transport14
 
 about:
   home: https://github.com/gazebosim/{{ repo_name }}
