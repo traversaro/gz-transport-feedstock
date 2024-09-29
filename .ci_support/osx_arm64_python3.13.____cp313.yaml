@@ -41,5 +41,7 @@ zeromq:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+- - libabseil
+  - libprotobuf
 - - python
   - channel_sources

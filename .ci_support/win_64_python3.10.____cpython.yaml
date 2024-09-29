@@ -27,5 +27,7 @@ target_platform:
 zeromq:
 - 4.3.5
 zip_keys:
+- - libabseil
+  - libprotobuf
 - - python
   - channel_sources
