@@ -1,0 +1,19 @@
+# Hardcode double protobuf pinning as a workaround for https://github.com/conda-forge/gz-common-feedstock/issues/48
+# remove once https://github.com/conda-forge/openvino-feedstock/pull/106 is merged
+zip_keys:
+  -
+    - libabseil
+    - libgrpc
+    - libprotobuf
+libabseil:
+  # part of a zip_keys: libabseil, libgrpc, libprotobuf
+  - '20240116'
+  - '20240722'
+libgrpc:
+  # part of a zip_keys: libabseil, libgrpc, libprotobuf
+  - "1.62"
+  - "1.65"
+libprotobuf:
+  # part of a zip_keys: libabseil, libgrpc, libprotobuf
+  - 4.25.3
+  - 5.27.5
