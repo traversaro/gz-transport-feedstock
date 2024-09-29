@@ -1,6 +1,6 @@
 {% set component_name = "transport" %}
 {% set repo_name = "gz-" + component_name %}
-{% set version = "13.4.0" %}
+{% set version = "14.0.0" %}
 {% set major_version = version.split('.')[0] %}
 {% set name = repo_name + major_version %}
 {% set component_version = component_name + major_version %}
@@ -13,13 +13,13 @@ package:
 
 source:
   - url: https://github.com/gazebosim/{{ repo_name }}/archive/{{ repo_name }}{{ major_version }}_{{ version }}.tar.gz
-    sha256: 7c9d7bc46b2d8abb81487be346cafe56b482873019110e39a7b65adb4cbc8514
+    sha256: f503b9c7c71f2dff9647c88c872886d4e26bbfff8f8011ebb27fd11cc59c97c0
     patches:
       - standalone_bindings.patch
       - 452.patch
 
 build:
-  number: 2
+  number: 0
 
 outputs:
   - name: {{ cxx_name }}
@@ -28,6 +28,8 @@ outputs:
     build:
       run_exports:
         - {{ pin_subpackage(cxx_name, max_pin='x') }}
+      ignore_run_exports_from:
+        - python
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -36,11 +38,14 @@ outputs:
         - ninja
         - cmake
         - pkg-config
+        - python                                 # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
       host:
-        - libgz-cmake3
-        - libgz-msgs10
+        - python
+        - libgz-cmake4
+        - libgz-msgs11
         - libgz-tools2
-        - libgz-utils2
+        - libgz-utils3
         - cppzmq
         - zeromq
         - libuuid                            # [linux]
@@ -82,23 +87,23 @@ outputs:
         - pybind11
         - pybind11-abi
         - pytest
-        - gz-msgs10-python
+        - gz-msgs11-python
         # Workaround for errors of type
         # package libgz-sim7-<..> requires <...>, but none of the providers can be installed
         - libabseil
         - libprotobuf
-        - libgz-msgs10
+        - libgz-msgs11
       run:
         - {{ pin_subpackage(cxx_name, exact=True) }}
         - python
-        - gz-msgs10-python
+        - gz-msgs11-python
     test:
       commands:
         - pip check
       requires:
         - pip
       imports:
-        - gz.transport13
+        - gz.transport14
 
   - name: {{ name }}
     build:
@@ -121,7 +126,7 @@ outputs:
       requires:
         - pip
       imports:
-        - gz.transport13
+        - gz.transport14
 
 about:
   home: https://github.com/gazebosim/{{ repo_name }}
