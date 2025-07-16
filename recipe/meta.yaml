@@ -19,7 +19,7 @@ source:
       - 452.patch
 
 build:
-  number: 5
+  number: 6
 
 outputs:
   - name: {{ cxx_name }}
