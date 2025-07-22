@@ -2,13 +2,13 @@ context:
   component_name: transport
   repo_name: gz-${{ component_name }}
   version: 14.1.0
-  major_version: ${{ version.split('.')[0] }}
+  major_version: 14
   name: ${{ repo_name }}${{ major_version }}
   component_version: ${{ component_name }}${{ major_version }}
   cxx_name: lib${{ name }}
   python_name: ${{ name }}-python
 
-package:
+recipe:
   name: ${{ name }}
   version: ${{ version }}
 
@@ -28,15 +28,16 @@ outputs:
           then: build_cxx.sh
         - if: win
           then: bld_cxx.bat
-      ignore_run_exports:
-        - python
-        - python_abi
-      ignore_run_exports_from:
-        - python
-        - if: build_platform != target_platform
-          then:
-            - cross-python_${{ target_platform }}
     requirements:
+      ignore_run_exports:
+        by_name:
+          - python
+          - python_abi
+        from_package:
+          - python
+          - if: build_platform != target_platform
+            then:
+              - cross-python_${{ target_platform }}
       build:
         - ${{ compiler('cxx') }}
         - ${{ compiler('c') }}
