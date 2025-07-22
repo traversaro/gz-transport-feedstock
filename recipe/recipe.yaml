@@ -1,0 +1,173 @@
+context:
+  component_name: transport
+  repo_name: gz-${{ component_name }}
+  version: 14.1.0
+  major_version: ${{ version.split('.')[0] }}
+  name: ${{ repo_name }}${{ major_version }}
+  component_version: ${{ component_name }}${{ major_version }}
+  cxx_name: lib${{ name }}
+  python_name: ${{ name }}-python
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/gazebosim/${{ repo_name }}/archive/${{ repo_name }}${{ major_version }}_${{ version }}.tar.gz
+    sha256: 3993d6272eb0c5a2ec94807b18ae02091b8a1b1723a345a83332de3677baff9a
+
+build:
+  number: 2
+
+outputs:
+  - package:
+      name: ${{ cxx_name }}
+    build:
+      script:
+        - if: unix
+          then: build_cxx.sh
+        - if: win
+          then: bld_cxx.bat
+      ignore_run_exports:
+        - python
+        - python_abi
+      ignore_run_exports_from:
+        - python
+        - if: build_platform != target_platform
+          then:
+            - cross-python_${{ target_platform }}
+    requirements:
+      build:
+        - ${{ compiler('cxx') }}
+        - ${{ compiler('c') }}
+        - ${{ stdlib("c") }}
+        - ninja
+        - cmake
+        - pkg-config
+        - if: build_platform != target_platform
+          then:
+            - python
+            - cross-python_${{ target_platform }}
+      host:
+        - python
+        - libgz-cmake4
+        - libgz-msgs11
+        - libgz-tools2
+        - libgz-utils3
+        - cppzmq
+        - zeromq
+        - if: linux
+          then:
+            - libuuid
+        - libabseil
+        - libprotobuf
+        - sqlite
+      run:
+        - cppzmq
+      run_exports:
+        - ${{ pin_subpackage(cxx_name, upper_bound='x') }}
+    tests:
+      - script:
+          - if: not win
+            then:
+              - test -f ${PREFIX}/include/gz/${{ component_version }}/gz/${{ component_name }}.hh
+              - test -f ${PREFIX}/lib/cmake/${{ name }}/${{ name }}-config.cmake
+          - if: linux
+            then:
+              - test -f ${PREFIX}/lib/lib${{ name }}.so
+          - if: osx
+            then:
+              - test -f ${PREFIX}/lib/lib${{ name }}.dylib
+          - if: win
+            then:
+              - if not exist %PREFIX%\\Library\\include\\gz\\${{ component_version }}\\gz\\${{ component_name }}.hh exit 1
+              - if not exist %PREFIX%\\Library\\lib\\${{ name }}.lib exit 1
+              - if not exist %PREFIX%\\Library\\bin\\${{ name }}.dll exit 1
+              - if not exist %PREFIX%\\Library\\lib\\cmake\\${{ name }}\\${{ name }}-config.cmake exit 1
+
+  - package:
+      name: ${{ python_name }}
+    build:
+      script:
+        - if: unix
+          then: build_py.sh
+        - if: win
+          then: bld_py.bat
+    requirements:
+      build:
+        - ${{ compiler('c') }}
+        - ${{ stdlib("c") }}
+        - ${{ compiler('cxx') }}
+        - ninja
+        - cmake
+        - pkg-config
+        - if: build_platform != target_platform
+          then:
+            - python
+            - cross-python_${{ target_platform }}
+            - pybind11
+            - pybind11-abi
+            - pytest
+      host:
+        - ${{ pin_subpackage(cxx_name, exact=True) }}
+        - python
+        - pybind11
+        - pybind11-abi
+        - pytest
+        - gz-msgs11-python
+        # Workaround for errors of type
+        # package libgz-sim7-<..> requires <...>, but none of the providers can be installed
+        - libabseil
+        - libprotobuf
+        - libgz-msgs11
+      run:
+        - ${{ pin_subpackage(cxx_name, exact=True) }}
+        - python
+        - gz-msgs11-python
+    tests:
+      - python:
+          imports:
+            - gz.transport14
+
+  - package:
+      name: ${{ name }}
+    requirements:
+      run:
+        - ${{ pin_subpackage(cxx_name, exact=True) }}
+        - ${{ pin_subpackage(python_name, upper_bound='x.x.x') }}
+      run_exports:
+        - ${{ pin_subpackage(cxx_name, upper_bound='x') }}
+    tests:
+      - script:
+          - if: not win
+            then:
+              - test -f ${PREFIX}/include/gz/${{ component_version }}/gz/${{ component_name }}.hh
+              - test -f ${PREFIX}/lib/cmake/${{ name }}/${{ name }}-config.cmake
+          - if: linux
+            then:
+              - test -f ${PREFIX}/lib/lib${{ name }}.so
+          - if: osx
+            then:
+              - test -f ${PREFIX}/lib/lib${{ name }}.dylib
+          - if: win
+            then:
+              - if not exist %PREFIX%\\Library\\include\\gz\\${{ component_version }}\\gz\\${{ component_name }}.hh exit 1
+              - if not exist %PREFIX%\\Library\\lib\\${{ name }}.lib exit 1
+              - if not exist %PREFIX%\\Library\\bin\\${{ name }}.dll exit 1
+              - if not exist %PREFIX%\\Library\\lib\\cmake\\${{ name }}\\${{ name }}-config.cmake exit 1
+      - python:
+          imports:
+            - gz.transport14
+
+about:
+  homepage: https://github.com/gazebosim/${{ repo_name }}
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Transport library for component communication based on publication/subscription and service calls.
+
+extra:
+  feedstock-name: ${{ repo_name }}
+  recipe-maintainers:
+    - wolfv
+    - traversaro
+    - j-rivero
