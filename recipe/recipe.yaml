@@ -2,7 +2,7 @@ context:
   component_name: transport
   repo_name: gz-${{ component_name }}
   version: 13.4.0
-  major_version: ${{ version.split('.')[0] }}
+  major_version: 13
   name: ${{ repo_name }}${{ major_version }}
   component_version: ${{ component_name }}${{ major_version }}
   cxx_name: lib${{ name }}
