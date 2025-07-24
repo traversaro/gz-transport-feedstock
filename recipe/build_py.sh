@@ -22,9 +22,9 @@ cmake ${CMAKE_ARGS} -GNinja .. \
     -DPython3_INCLUDE_DIR:PATH=$Python3_INCLUDE_DIR \
     -DBUILD_TESTING:BOOL=ON
 
-cmake --build . --config Release
-cmake --build . --config Release --target install
+cmake --build . --config Release --verbose
+cmake --build . --config Release --verbose --target install
 
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" ]]; then
-  ctest --output-on-failure -C Release -E "requester_TEST|pubSub_TEST"
+  ctest --output-on-failure -VV -C Release -E "requester_TEST|pubSub_TEST"
 fi
