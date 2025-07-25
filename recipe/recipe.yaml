@@ -49,10 +49,10 @@ outputs:
         - pkg-config
         - if: build_platform != target_platform
           then:
-            - python
+            - python ${{ python_min }}.*
             - cross-python_${{ target_platform }}
       host:
-        - python
+        - python ${{ python_min }}.*
         - libgz-cmake4
         - libgz-msgs11
         - libgz-tools2
