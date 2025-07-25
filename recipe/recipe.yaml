@@ -1,7 +1,7 @@
 context:
   component_name: transport
   repo_name: gz-${{ component_name }}
-  version: 13.4.0
+  version: 13.4.1
   major_version: 13
   name: ${{ repo_name }}${{ major_version }}
   component_version: ${{ component_name }}${{ major_version }}
@@ -14,13 +14,12 @@ recipe:
 
 source:
   - url: https://github.com/gazebosim/${{ repo_name }}/archive/${{ repo_name }}${{ major_version }}_${{ version }}.tar.gz
-    sha256: 7c9d7bc46b2d8abb81487be346cafe56b482873019110e39a7b65adb4cbc8514
+    sha256: 2aac8fcfd525091648f405738e95d5d8b55b87767e6cb74afde6390a5fe924c5
     patches:
-      - standalone_bindings.patch
-      - 452.patch
+      - 619.patch
 
 build:
-  number: 7
+  number: 0
 
 outputs:
   - package:
@@ -93,14 +92,14 @@ outputs:
         - pkg-config
         - if: build_platform != target_platform
           then:
-            - python
+            - python ${{ python_min }}.*
             - cross-python_${{ target_platform }}
             - pybind11
             - pybind11-abi
             - pytest
       host:
         - ${{ pin_subpackage(cxx_name, exact=True) }}
-        - python
+        - python ${{ python_min }}.*
         - pybind11
         - pybind11-abi
         - pytest
