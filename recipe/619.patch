@@ -407,19 +407,6 @@ index 8bf7aeaae..8c8db7ade 100644
    node.Subscribe("/no", topicCB);
    node.Unsubscribe("/no");
  
-diff --git a/test/integration/test_executables/twoProcsPubSubSingleSubscriber_aux.cc b/test/integration/test_executables/twoProcsPubSubSingleSubscriber_aux.cc
-index bde4f834c..f89b77d17 100644
---- a/test/integration/test_executables/twoProcsPubSubSingleSubscriber_aux.cc
-+++ b/test/integration/test_executables/twoProcsPubSubSingleSubscriber_aux.cc
-@@ -72,7 +72,7 @@ void runSubscriber()
- 
-   // Add a raw subscription to `node`
-   EXPECT_TRUE(node.SubscribeRaw(g_topic, cbRaw,
--                                msgs::Vector3d().GetTypeName()));
-+                                std::string(msgs::Vector3d().GetTypeName())));
- 
-   int interval = 100;
- 
 diff --git a/test/integration/test_executables/twoProcsPubSubSubscriber_aux.cc b/test/integration/test_executables/twoProcsPubSubSubscriber_aux.cc
 index 1130e7798..be1598006 100644
 --- a/test/integration/test_executables/twoProcsPubSubSubscriber_aux.cc
