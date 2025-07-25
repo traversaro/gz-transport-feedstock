@@ -15,9 +15,11 @@ recipe:
 source:
   - url: https://github.com/gazebosim/${{ repo_name }}/archive/${{ repo_name }}${{ major_version }}_${{ version }}.tar.gz
     sha256: 3993d6272eb0c5a2ec94807b18ae02091b8a1b1723a345a83332de3677baff9a
+    patches:
+      - fixprotobuf30.patch
 
 build:
-  number: 2
+  number: 3
 
 outputs:
   - package:
@@ -47,10 +49,10 @@ outputs:
         - pkg-config
         - if: build_platform != target_platform
           then:
-            - python
+            - python ${{ python_min }}.*
             - cross-python_${{ target_platform }}
       host:
-        - python
+        - python ${{ python_min }}.*
         - libgz-cmake4
         - libgz-msgs11
         - libgz-tools2

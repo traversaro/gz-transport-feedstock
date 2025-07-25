@@ -9,9 +9,9 @@ channel_targets:
 cxx_compiler:
 - vs2022
 libabseil:
-- '20250127'
+- '20250512'
 libprotobuf:
-- 5.29.3
+- 6.31.1
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -24,6 +24,8 @@ python:
 - 3.12.* *_cpython
 - 3.13.* *_cp313
 - 3.9.* *_cpython
+python_min:
+- '3.9'
 sqlite:
 - '3'
 target_platform:
