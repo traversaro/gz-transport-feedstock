@@ -1,0 +1,14 @@
+(gzprotobufws) traversaro@IITBMP014LW012:~/gzprotobufws/gz-transport/build$ git diff
+diff --git a/test/integration/test_executables/twoProcsPubSubMixedSubscribers_aux.cc b/test/integration/test_executables/twoProcsPubSubMixedSubscribers_aux.cc
+index 9a094e4f..6ca36b4a 100644
+--- a/test/integration/test_executables/twoProcsPubSubMixedSubscribers_aux.cc
++++ b/test/integration/test_executables/twoProcsPubSubMixedSubscribers_aux.cc
+@@ -97,7 +97,7 @@ void runSubscriber()
+   // Subscribe to topic using a mix of Subscribe / CreateSubscriber APIs
+   EXPECT_TRUE(node.Subscribe(g_topic, cb));
+   EXPECT_TRUE(node.SubscribeRaw(g_topic, cbRaw,
+-                                msgs::Vector3d().GetTypeName()));
++                                std::string(msgs::Vector3d().GetTypeName())));
+   transport::Node::Subscriber sub = node.CreateSubscriber(g_topic, cbCreateSub);
+   EXPECT_TRUE(sub);
+   transport::Node::Subscriber sub2 = node.CreateSubscriber(g_topic,
