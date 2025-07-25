@@ -20,7 +20,7 @@ source:
       - 452.patch
 
 build:
-  number: 7
+  number: 8
 
 outputs:
   - package:
@@ -93,14 +93,14 @@ outputs:
         - pkg-config
         - if: build_platform != target_platform
           then:
-            - python
+            - python ${{ python_min }}.*
             - cross-python_${{ target_platform }}
             - pybind11
             - pybind11-abi
             - pytest
       host:
         - ${{ pin_subpackage(cxx_name, exact=True) }}
-        - python
+        - python ${{ python_min }}.*
         - pybind11
         - pybind11-abi
         - pytest
