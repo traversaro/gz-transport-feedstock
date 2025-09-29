@@ -19,7 +19,7 @@ source:
       - fixprotobuf30.patch
 
 build:
-  number: 3
+  number: 4
 
 outputs:
   - package:
@@ -161,6 +161,54 @@ outputs:
       - python:
           imports:
             - gz.transport14
+
+  # Versionless dummy packages, see https://github.com/conda-forge/gz-sim-feedstock/issues/102
+  - package:
+      name: libgz-${{ component_name}}
+    requirements:
+      run:
+        - ${{ pin_subpackage(cxx_name, exact=true) }}
+      run_exports:
+        - ${{ pin_subpackage(cxx_name, upper_bound='x') }}
+        - ${{ pin_subpackage('libgz-transport', upper_bound='x') }}
+    tests:
+      - script:
+          - cmake-package-check gz-${{ component_name}}${{ major_version }}
+        requirements:
+          run:
+            - cmake-package-check
+            - ${{ compiler('c') }}
+            - ${{ compiler('cxx') }}
+
+  - package:
+      name: gz-${{ component_name}}-python
+    requirements:
+      run:
+        - ${{ pin_subpackage(python_name, upper_bound='x.x.x') }}
+    tests:
+      - python:
+          imports:
+            - gz.${{ component_name}}${{ major_version }}
+
+  - package:
+      name: gz-${{ component_name}}
+    requirements:
+      run:
+        - ${{ pin_subpackage(name, exact=true) }}
+      run_exports:
+        - ${{ pin_subpackage(cxx_name, upper_bound='x') }}
+        - ${{ pin_subpackage('libgz-transport', upper_bound='x') }}
+    tests:
+      - script:
+          - cmake-package-check gz-${{ component_name}}${{ major_version }}
+        requirements:
+          run:
+            - cmake-package-check
+            - ${{ compiler('c') }}
+            - ${{ compiler('cxx') }}
+      - python:
+          imports:
+            - gz.${{ component_name}}${{ major_version }}
 
 about:
   homepage: https://github.com/gazebosim/${{ repo_name }}
