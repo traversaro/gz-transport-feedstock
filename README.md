@@ -81,9 +81,9 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--transport14-green.svg)](https://anaconda.org/conda-forge/gz-transport14) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-transport14.svg)](https://anaconda.org/conda-forge/gz-transport14) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-transport14.svg)](https://anaconda.org/conda-forge/gz-transport14) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-transport14.svg)](https://anaconda.org/conda-forge/gz-transport14) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--transport14--python-green.svg)](https://anaconda.org/conda-forge/gz-transport14-python) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-transport14-python.svg)](https://anaconda.org/conda-forge/gz-transport14-python) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-transport14-python.svg)](https://anaconda.org/conda-forge/gz-transport14-python) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-transport14-python.svg)](https://anaconda.org/conda-forge/gz-transport14-python) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-libgz--transport14-green.svg)](https://anaconda.org/conda-forge/libgz-transport14) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgz-transport14.svg)](https://anaconda.org/conda-forge/libgz-transport14) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgz-transport14.svg)](https://anaconda.org/conda-forge/libgz-transport14) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgz-transport14.svg)](https://anaconda.org/conda-forge/libgz-transport14) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--transport-green.svg)](https://anaconda.org/conda-forge/gz-transport) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-transport.svg)](https://anaconda.org/conda-forge/gz-transport) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-transport.svg)](https://anaconda.org/conda-forge/gz-transport) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-transport.svg)](https://anaconda.org/conda-forge/gz-transport) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-gz--transport--python-green.svg)](https://anaconda.org/conda-forge/gz-transport-python) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gz-transport-python.svg)](https://anaconda.org/conda-forge/gz-transport-python) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gz-transport-python.svg)](https://anaconda.org/conda-forge/gz-transport-python) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gz-transport-python.svg)](https://anaconda.org/conda-forge/gz-transport-python) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libgz--transport-green.svg)](https://anaconda.org/conda-forge/libgz-transport) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libgz-transport.svg)](https://anaconda.org/conda-forge/libgz-transport) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libgz-transport.svg)](https://anaconda.org/conda-forge/libgz-transport) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libgz-transport.svg)](https://anaconda.org/conda-forge/libgz-transport) |
 
 Installing gz-transport
 =======================
@@ -95,41 +95,41 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `gz-transport14, gz-transport14-python, libgz-transport14` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `gz-transport, gz-transport-python, libgz-transport` can be installed with `conda`:
 
 ```
-conda install gz-transport14 gz-transport14-python libgz-transport14
-```
-
-or with `mamba`:
-
-```
-mamba install gz-transport14 gz-transport14-python libgz-transport14
-```
-
-It is possible to list all of the versions of `gz-transport14` available on your platform with `conda`:
-
-```
-conda search gz-transport14 --channel conda-forge
+conda install gz-transport gz-transport-python libgz-transport
 ```
 
 or with `mamba`:
 
 ```
-mamba search gz-transport14 --channel conda-forge
+mamba install gz-transport gz-transport-python libgz-transport
+```
+
+It is possible to list all of the versions of `gz-transport` available on your platform with `conda`:
+
+```
+conda search gz-transport --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search gz-transport --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search gz-transport14 --channel conda-forge
+mamba repoquery search gz-transport --channel conda-forge
 
-# List packages depending on `gz-transport14`:
-mamba repoquery whoneeds gz-transport14 --channel conda-forge
+# List packages depending on `gz-transport`:
+mamba repoquery whoneeds gz-transport --channel conda-forge
 
-# List dependencies of `gz-transport14`:
-mamba repoquery depends gz-transport14 --channel conda-forge
+# List dependencies of `gz-transport`:
+mamba repoquery depends gz-transport --channel conda-forge
 ```
 
 
