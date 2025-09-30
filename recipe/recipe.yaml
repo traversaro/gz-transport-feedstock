@@ -59,6 +59,8 @@ outputs:
         - libgz-utils
         - cppzmq
         - zeromq
+        - libzenohc
+        - libzenohcxx
         - if: linux
           then:
             - libuuid
