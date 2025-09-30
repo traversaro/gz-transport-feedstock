@@ -14,7 +14,7 @@ recipe:
 
 source:
   - url: https://github.com/gazebosim/${{ repo_name }}/archive/${{ repo_name }}${{ major_version }}_${{ version }}.tar.gz
-    sha256: 3993d6272eb0c5a2ec94807b18ae02091b8a1b1723a345a83332de3677baff9a
+    sha256: ca9e9a3dea208f4be96043a34b8e184e0f8015705c4f9ff1efa813d588f197e9
     patches:
       - fixprotobuf30.patch
 
