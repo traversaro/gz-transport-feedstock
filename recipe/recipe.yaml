@@ -117,7 +117,9 @@ outputs:
         - pybind11
         - pybind11-abi
         - pytest
-        - gz-msgs11-python
+        - gz-msgs-python
+        # We depend on gz-msgs to ensure that the version of gz-msgs and gz-msgs-python are compatible
+        - gz-msgs
         # Workaround for errors of type
         # package libgz-sim7-<..> requires <...>, but none of the providers can be installed
         - libabseil
@@ -127,6 +129,8 @@ outputs:
         - ${{ pin_subpackage(cxx_name, exact=True) }}
         - python
         - gz-msgs-python
+        # We depend on gz-msgs to ensure that the version of gz-msgs and gz-msgs-python are compatible
+        - gz-msgs
     tests:
       - python:
           imports:
